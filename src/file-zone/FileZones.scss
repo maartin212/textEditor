@@ -8,8 +8,26 @@
 }
 
 #file {
-    width: 600px;
+    width: 90%;
+    max-height: 40vh ;
     flex-grow: 1;
     background-color: #fff;
     border: 1px solid #e4dede;
+}
+
+#file {
+    * {
+        display: initial;
+    }
+}
+
+#text-input {
+    box-sizing: border-box;
+    margin: 1rem 0;
+    width: 90%;
+    height: 40vh;
+}
+
+#synonyms-select {
+    display: block;
 }
