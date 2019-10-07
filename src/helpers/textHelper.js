@@ -3,7 +3,7 @@ const getWords = (text) => {
 };
 
 const spanWords = (words) => {
-    return words.map((word, index) => `<span id=${index} key=${index}>${word}</span>`);
+    return words.map((word, index) => `<span id=${index}>${word}</span>`);
 };
 
 const joinWords = (spannedWords) => {
