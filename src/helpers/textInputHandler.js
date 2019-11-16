@@ -1,9 +1,9 @@
-import textConverter from './textHelper';
+import {addText, deleteState} from "./stateHelper";
 
-const textInputHandler = () => {
+const textInputHandler = (state, dispatch) => {
     const text = document.getElementById('text-input');
-    const file = document.getElementById('file');
-    file.innerHTML = textConverter(text.value);
+    deleteState(state, dispatch)
+    addText(state, dispatch, text.value)
 };
 
 export default textInputHandler;

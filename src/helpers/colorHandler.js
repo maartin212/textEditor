@@ -1,18 +1,15 @@
 import activeElParentNode from "./activeElParentNode";
-import isParentElSpan from "./isParentElSpan";
+import {addStyle} from "./stateHelper";
 
-const colorHandler = (color) => {
+const colorHandler = (state, dispatch, color) => {
     let activeElContainer = activeElParentNode();
     if(!activeElContainer) return;
-    if(isParentElSpan(activeElContainer)){
-        activeElContainer = activeElContainer.parentNode;
-    }
-    if(color === 'colors'){
-        activeElContainer.style.color = null;
-        return;
-    }
-    activeElContainer.style.color = color;
 
+    const wordId = activeElContainer.getAttribute('id')
+    if(color === 'colors'){
+        color = ''
+    }
+    addStyle(state, dispatch, {color:color}, wordId)
 };
 
 export default colorHandler;

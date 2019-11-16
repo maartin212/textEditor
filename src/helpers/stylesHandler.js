@@ -1,15 +1,14 @@
 import activeElParentNode from './activeElParentNode';
 import pressedButtonHandler from './pressedButtonsHandler';
-import isParentElSpan from './isParentElSpan';
+import {addClass} from '../helpers/stateHelper'
 
-const stylesHandler = (styleType) => {
+const stylesHandler = (state, dispatch, styleType) => {
     let activeElContainer = activeElParentNode();
     if(!activeElContainer) return;
-    if(isParentElSpan(activeElContainer)){
-        activeElContainer = activeElContainer.parentNode;
-    }
+
+    const wordId = activeElContainer.getAttribute('id')
     pressedButtonHandler(styleType);
-    activeElContainer.classList.toggle(styleType);
+    addClass(state, dispatch, styleType, wordId)
 };
 
 export default stylesHandler;

@@ -1,6 +1,7 @@
 import activeElParentNode from './activeElParentNode';
 import pressedButtonHandler from './pressedButtonsHandler';
 import isParentElSpan from './isParentElSpan';
+import {setSelectedWord} from "./stateHelper";
 
 const removeClickedButtons = () => {
     const buttonsList = document.getElementById('control-panel').firstChild.childNodes;
@@ -40,7 +41,7 @@ const setSelectedOptions = (activeElContainer) => {
     styles.map(style => setSelects(style));
 };
 
-const wordSelectedHandler = () => {
+const wordSelectedHandler = (state, dispatch) => {
     const activeElContainer = activeElParentNode();
     if(!activeElContainer){
         document.getElementById('color-select').getElementsByTagName('option')[0].selected = 'selected';
@@ -51,7 +52,18 @@ const wordSelectedHandler = () => {
     }
     paintClickedButtons(activeElContainer);
     setSelectedOptions(activeElContainer);
+    const wordId = activeElContainer.getAttribute('id')
+    setSelectedWord(state, dispatch, wordId)
+    // dispatch('SET_SELECTED_WORD', {payload:activeElContainer.getAttribute('id')})
 };
+
+export const getSelectedId = () => {
+    const activeElContainer = activeElParentNode();
+    if(!activeElContainer){
+        return null;
+    }
+    return activeElContainer.getAttribute('id')
+}
 
 
 export default wordSelectedHandler;

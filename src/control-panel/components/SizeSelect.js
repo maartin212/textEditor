@@ -5,7 +5,7 @@ const SizeSelect = (props) => {
     const {min, max} = props;
 
     const selectedSize = (e) => {
-        sizeHandler(e.target.value);
+        sizeHandler(props.state, props.dispatch, e.target.value);
     };
 
     const createSizesList = (min, max) => {

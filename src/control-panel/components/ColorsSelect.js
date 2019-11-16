@@ -3,7 +3,7 @@ import colorHandler from '../../helpers/colorHandler';
 
 const ColorsSelect = (props) => {
     const selectedColor = (e) => {
-        colorHandler(e.target.value);
+        colorHandler(props.state, props.dispatch, e.target.value);
     };
 
     return <select id='color-select' className='format-action' onChange={selectedColor}>

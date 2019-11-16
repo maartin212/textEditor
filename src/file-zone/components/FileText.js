@@ -1,21 +1,18 @@
-import {useState} from 'react';
+import React, {useEffect} from 'react';
 import getMockText from '../../text.service';
-import textConverter from '../../helpers/textHelper';
+import TextFactory from './TextFactory'
+import {addText, loadState} from '../../helpers/stateHelper'
 
-const FileText = () => {
-    const [text, setText] = useState('');
-    getMockText()
-        .then(res => setText(res))
-        .catch(e => setText('Error: ' + e));
+const FileText = (props) => {
 
-    const getText = (text) => {
-        const savedFile = window.localStorage.getItem('savedFile');
-        const file = document.getElementById('file');
-        if (!file) return null;
-        savedFile ? file.innerHTML = savedFile : file.innerHTML = textConverter(text);
-        return null;
-    };
-    return getText(text);
+    useEffect(() => {
+        loadState(props.dispatch) ||
+        getMockText()
+            .then(res => addText(props.state, props.dispatch, res))
+            .catch(e => addText(props.state, props.dispatch, 'Error: ' + e));
+        }, [])
+
+    return <TextFactory state={props.state}/>
 };
 
 export default FileText;

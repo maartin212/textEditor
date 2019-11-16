@@ -1,17 +1,15 @@
 import activeElParentNode from './activeElParentNode';
-import isParentElSpan from './isParentElSpan';
+import {addStyle} from "./stateHelper";
 
-const sizeHandler = (size) => {
+const sizeHandler = (state, dispatch, size) => {
     let activeElContainer = activeElParentNode();
     if(!activeElContainer) return;
-    if(isParentElSpan(activeElContainer)){
-        activeElContainer = activeElContainer.parentNode;
-    }
+
+    const wordId = activeElContainer.getAttribute('id')
     if(size === 'select size'){
-        activeElContainer.style.fontSize = null;
-        return;
+        size = ''
     }
-    activeElContainer.style.fontSize = size;
+    addStyle(state, dispatch, {fontSize:size}, wordId)
 };
 
 export default sizeHandler;
