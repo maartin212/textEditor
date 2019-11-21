@@ -5,14 +5,18 @@ import {addText, loadState} from '../../helpers/stateHelper'
 
 const FileText = (props) => {
 
+    const {state, dispatch} = props
+
     useEffect(() => {
-        loadState(props.dispatch) ||
+        loadState(dispatch) ||
         getMockText()
-            .then(res => addText(props.state, props.dispatch, res))
-            .catch(e => addText(props.state, props.dispatch, 'Error: ' + e));
+            .then(res => addText(state, dispatch, res))
+            .catch(e => addText(state, dispatch, 'Error: ' + e));
         }, [])
 
-    return <TextFactory state={props.state}/>
+    return <div id='file'>
+        <TextFactory {...{state}}/>
+    </div>
 };
 
 export default FileText;

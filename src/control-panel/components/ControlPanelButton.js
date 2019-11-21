@@ -1,11 +1,14 @@
-import stylesHandler from '../../helpers/stylesHandler';
 import React from 'react';
-import tagsHandler from '../../helpers/tagsHandler';
+import {buttonHandler} from '../../helpers/controlPanelHelpers';
 
 const ControlPanelButton = (props) => {
-    const {styleType, symbol, type, state, dispatch} = props;
-    let buttonFunction =  type === 'tag' ? tagsHandler : stylesHandler;
-    return <button className='format-action' type='button' id={`${styleType}Button`} onClick={() => buttonFunction(state, dispatch, styleType)}>{symbol}</button>
+    const {activeStyles, activeTag, styleType, symbol, type, state, dispatch} = props;
+
+    const isClicked = activeStyles.includes(styleType) || activeTag === styleType
+    const clicked = isClicked ? 'clicked' : ''
+    const cls = `format-action ${clicked}`
+
+    return <button className={cls} onClick={() => buttonHandler(state, dispatch, type, styleType)}>{symbol}</button>
 };
 
 export default ControlPanelButton;

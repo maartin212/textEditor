@@ -1,13 +1,18 @@
 import React from 'react';
-import colorHandler from '../../helpers/colorHandler';
+import {colorHandler} from '../../helpers/controlPanelHelpers';
 
 const ColorsSelect = (props) => {
+
+    const {state, dispatch} = props
+
     const selectedColor = (e) => {
-        colorHandler(props.state, props.dispatch, e.target.value);
+        colorHandler(state, dispatch, e.target.value);
     };
 
-    return <select id='color-select' className='format-action' onChange={selectedColor}>
-        {props.colors.map(color => <option key={color} value={color}>{color}</option>)}
+    return <select className='format-action' onChange={selectedColor}>
+        {props.colors.map(color =>
+            <option key={color} value={color} selected={color===props.activeColor}>{color}</option>
+        )}
     </select>
 }
 

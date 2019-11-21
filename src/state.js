@@ -14,12 +14,12 @@ function reducer (state, action) {
         case 'ADD_STYLE':
             state.text[action.payload.key].styles = action.payload.styles
             return {...state}
-        case 'REMOVE_WORD':
-            state.text.splice(action.payload.key, 1)
+        case 'CHANGE_WORD':
+            state.text[action.payload.key].value = action.payload.value
             return state
         case 'SET_SELECTED_WORD':
-            state.wordId = action.payload
-            return state
+            if(state.wordId === action.payload) return state
+            return {...state, wordId:action.payload}
         case 'SET_STATE':
             return {wordId:'', text:action.payload}
         case 'PRINT':

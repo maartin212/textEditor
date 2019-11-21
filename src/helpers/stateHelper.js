@@ -1,3 +1,11 @@
+import {activeElNode} from "./fileHelpers";
+
+export const getSelectedWordId = () => {
+    let activeElContainer = activeElNode();
+    if(!activeElContainer) return;
+    return activeElContainer.getAttribute('id')
+}
+
 export const addText = (state, dispatch, text) => {
     if(!text) return
     text = text.trim()
@@ -5,12 +13,12 @@ export const addText = (state, dispatch, text) => {
     words.map((word, index) => dispatch({type: 'ADD_WORD', payload: {classes:[], styles:{}, tag:'', key:index, value:word}}))
 }
 
-export const setSelectedWord = (state, dispatch, wordId) => {
-    // if(state.wordId === wordId) return
+export const setSelectedWord = (state, dispatch, wordId = getSelectedWordId()) => {
     dispatch({type:'SET_SELECTED_WORD', payload:wordId})
 }
 
-export const addClass = (state, dispatch, classToAdd, wordId) => {
+export const addClass = (state, dispatch, classToAdd) => {
+    const wordId = getSelectedWordId()
     const word = state.text[wordId]
     const wordClasses = word.classes
     const index = wordClasses.indexOf(classToAdd)
@@ -18,23 +26,31 @@ export const addClass = (state, dispatch, classToAdd, wordId) => {
     dispatch({type:'ADD_CLASS', payload:{key: wordId, classes: wordClasses}})
 }
 
-export const addTag = (state, dispatch, tagToAdd, wordId) => {
+export const addTag = (state, dispatch, tagToAdd) => {
+    const wordId = getSelectedWordId()
     const word = state.text[wordId]
     const wordTag = word.tag
     const finalTag = wordTag !== tagToAdd ? tagToAdd : ''
     dispatch({type:'ADD_TAG', payload:{key:wordId, tag:finalTag}})
 }
 
-export const addStyle = (state, dispatch, stylesToAdd, wordId) => {
+export const addStyle = (state, dispatch, stylesToAdd) => {
+    const wordId = getSelectedWordId()
     const word = state.text[wordId]
     const wordStyles = word.styles
 
     dispatch({type:'ADD_STYLE', payload:{key:wordId, styles:{...wordStyles, ...stylesToAdd}}})
+}
 
+export const changeWord = (state, dispatch, value) => {
+    const wordId = getSelectedWordId()
+
+    // const word = state.wordId && state.text[state.wordId]
+    // console.log((word))
+    // dispatch({type:'CHANGE_WORD', payload:{key:wordId, value:value}})
 }
 
 export const removeStyles = (state, dispatch) => {
-    console.log("dis", dispatch)
     state.text.map((word, index) => dispatch({type: 'ADD_WORD', payload: {classes:[], styles:{}, tag:'', key:index, value:word.value}}))
 }
 
@@ -52,7 +68,7 @@ export const loadState = (dispatch) => {
     return loadedState
 }
 
-export const clearState = (dispatch) => {
+export const clearState = (state, dispatch) => {
     window.localStorage.removeItem('savedState');
-    document.location.reload();
+    removeStyles(state, dispatch)
 }

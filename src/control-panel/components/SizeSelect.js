@@ -1,11 +1,11 @@
 import React from 'react';
-import sizeHandler from '../../helpers/sizeHandler';
+import {sizeHandler} from '../../helpers/controlPanelHelpers';
 
 const SizeSelect = (props) => {
-    const {min, max} = props;
+    const {state, dispatch, min, max} = props;
 
     const selectedSize = (e) => {
-        sizeHandler(props.state, props.dispatch, e.target.value);
+        sizeHandler(state, dispatch, e.target.value);
     };
 
     const createSizesList = (min, max) => {
@@ -18,9 +18,11 @@ const SizeSelect = (props) => {
 
     const sizesList = createSizesList(min, max)
 
-    return <select id='font-size-select' className='format-action' onChange={selectedSize}>
+    return <select className='format-action' onChange={selectedSize}>
         <option>select size</option>
-        {sizesList.map(size => <option key={size} value={`${size}px`}>{`${size}px`}</option>)}
+        {sizesList.map(size =>
+            <option key={size} value={`${size}px`} selected={`${size}px`===props.activeSize}>{`${size}px`}</option>
+        )}
     </select>
 }
 
