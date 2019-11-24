@@ -1,5 +1,5 @@
 import {activeElNode} from './fileHelpers';
-import {addClass, addStyle, addTag} from "./stateHelper";
+import {addClass, addStyle, addTag, changeWord} from "./stateHelper";
 
 export const buttonHandler = (state, dispatch, type, value) => {
     let activeElContainer = activeElNode();
@@ -26,3 +26,18 @@ export const sizeHandler = (state, dispatch, size) => {
     }
     addStyle(state, dispatch, {fontSize:size})
 };
+
+const getSelectedSynonym = () => {
+    const list = document.getElementsByName('synonym')
+    for(const el of list){
+        if(el.checked) {
+            console.log(el.value)
+            return el.value
+        }
+    }
+}
+
+export const synonymsHandler = (state, dispatch) => {
+    const selectedSynonym = getSelectedSynonym();
+    changeWord(state, dispatch, selectedSynonym)
+}

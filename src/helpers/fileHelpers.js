@@ -2,7 +2,6 @@ import {addText, deleteState, setSelectedWord} from "./stateHelper";
 
 export const activeElNode = () => {
     const activeEl = window.getSelection();
-
     if(!activeEl || !activeEl.anchorNode || !activeEl.toString()) return;
     return activeEl.anchorNode.parentElement;
 };

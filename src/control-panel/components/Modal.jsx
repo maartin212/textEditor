@@ -1,28 +1,22 @@
 import React from 'react'
-import {changeWord, setSelectedWord} from "../../helpers/stateHelper";
+import {synonymsHandler} from '../../helpers/controlPanelHelpers'
 
 const Modal = (props) => {
-    const onClose = e => {
+    const closeButton = e => {
         props.onClose && props.onClose(e)
     };
 
-    const getSelectedSynonym = () => {
-        const list = document.getElementsByName('synonym')
-        for(const el of list){
-            if(el.checked) {
-                return el.value
-            }
-        }
+    const changeButton = e => {
+        synonymsHandler(props.state, props.dispatch);
+        closeButton(e)
     }
-
-    changeWord(props.state, props.dispatch, getSelectedSynonym)
 
     if(!props.show) return null
     return <div className={'synonyms-modal-container'}>
         <div className={'synonyms-modal'}>
         <div className={'synonyms-list'} id={'synonyms-list'}>{props.children}</div>
-        <button onClick={changeWord}>Change</button>
-        <button onClick={onClose}>Close</button>
+        <button onClick={changeButton}>Change</button>
+        <button onClick={closeButton}>Close</button>
         </div>
     </div>
 }

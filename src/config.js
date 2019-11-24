@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const synonymsAPI = 'https://api.datamuse.com/words?ml=';
+export const synonymsAPI = 'https://cors-anywhere.herokuapp.com/https://api.datamuse.com/words?ml=';
 
 export const Modifiers = [
     {styleType:'bold', symbol:<b>B</b>, type:'class'},

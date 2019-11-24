@@ -16,7 +16,7 @@ function reducer (state, action) {
             return {...state}
         case 'CHANGE_WORD':
             state.text[action.payload.key].value = action.payload.value
-            return state
+            return {...state}
         case 'SET_SELECTED_WORD':
             if(state.wordId === action.payload) return state
             return {...state, wordId:action.payload}

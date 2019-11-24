@@ -1,5 +1,13 @@
 import {activeElNode} from "./fileHelpers";
 
+export const setSelectedWord = (state, dispatch, wordId = getSelectedWordId()) => {
+    dispatch({type:'SET_SELECTED_WORD', payload:wordId})
+}
+
+export const getSelectedWord = (state, dispatch, wordId = getSelectedWordId()) => {
+    dispatch({type:'SET_SELECTED_WORD', payload:wordId})
+}
+
 export const getSelectedWordId = () => {
     let activeElContainer = activeElNode();
     if(!activeElContainer) return;
@@ -13,10 +21,6 @@ export const addText = (state, dispatch, text) => {
     words.map((word, index) => dispatch({type: 'ADD_WORD', payload: {classes:[], styles:{}, tag:'', key:index, value:word}}))
 }
 
-export const setSelectedWord = (state, dispatch, wordId = getSelectedWordId()) => {
-    dispatch({type:'SET_SELECTED_WORD', payload:wordId})
-}
-
 export const addClass = (state, dispatch, classToAdd) => {
     const wordId = getSelectedWordId()
     const word = state.text[wordId]
@@ -27,11 +31,32 @@ export const addClass = (state, dispatch, classToAdd) => {
 }
 
 export const addTag = (state, dispatch, tagToAdd) => {
+
+    const el = activeElNode()
+    const el_id = el.getAttribute('id')
+    console.log(el_id)
+    console.log(window.getSelection())
+    const range = document.createRange();
+    console.log("tyep", range.startContainer)
+    // range.setStart(el, el.)
+    const selection = window.getSelection();
+
+
+
     const wordId = getSelectedWordId()
     const word = state.text[wordId]
     const wordTag = word.tag
     const finalTag = wordTag !== tagToAdd ? tagToAdd : ''
     dispatch({type:'ADD_TAG', payload:{key:wordId, tag:finalTag}})
+
+    const final_el = document.getElementById(el_id)
+    console.log(final_el)
+    range.selectNodeContents(document.getElementById(el_id));
+    selection.removeAllRanges();
+    selection.addRange(range);
+    // selection.addRange(range.startContainer = `${word.tag}#${el_id}`;
+    console.log(selection)
+    console.log(range)
 }
 
 export const addStyle = (state, dispatch, stylesToAdd) => {
@@ -44,10 +69,8 @@ export const addStyle = (state, dispatch, stylesToAdd) => {
 
 export const changeWord = (state, dispatch, value) => {
     const wordId = getSelectedWordId()
-
-    // const word = state.wordId && state.text[state.wordId]
-    // console.log((word))
-    // dispatch({type:'CHANGE_WORD', payload:{key:wordId, value:value}})
+    if(!wordId) return;
+    dispatch({type:'CHANGE_WORD', payload:{key:wordId, value:value}})
 }
 
 export const removeStyles = (state, dispatch) => {

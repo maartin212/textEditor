@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import Modal from "./Modal";
 import {activeElNode} from "../../helpers/fileHelpers";
 import {synonymsAPI} from "../../config";
+import Modal from "./Modal";
 
 const SynonymsSelect = (props) => {
     const [showModal, setShowModal] = useState(false)
@@ -13,7 +13,7 @@ const SynonymsSelect = (props) => {
         const activeNode = activeElNode()
         if(!activeNode) return;
         setSelectedNode(activeNode)
-        fetch('https://cors-anywhere.herokuapp.com/'+synonymsAPI+activeEl.toString())
+        fetch(synonymsAPI+activeEl.toString())
             .then(res => res.json())
             .then(jsonRes => {
                 setSynonyms(jsonRes.map(item => item.word))
@@ -31,7 +31,6 @@ const SynonymsSelect = (props) => {
                 </div>)}
         </Modal>
     </>
-
 }
 
 export default SynonymsSelect

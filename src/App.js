@@ -15,13 +15,12 @@ const App = () => {
             <header>
                 <span>Simple Text Editor</span>
             </header>
-                <main>
-                    <ControlPanel {...{state, dispatch}}/>
-                    <FileZone {...{state, dispatch}}/>
-                </main>
+            <main>
+                <ControlPanel {...{state, dispatch}}/>
+                <FileZone {...{state, dispatch}}/>
+            </main>
         </div>
     );
-
 };
 
 export default App;
