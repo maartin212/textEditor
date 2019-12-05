@@ -11,11 +11,11 @@ Run `npm start` for a dev server.
 + Text sample is given in `text.service.js`
 
 ## To add Styles
-+ Add the className and the display to _**stylesModifiers**_ in `config.js`
++ Add the className and the display to _**Modifiers**_ in `config.js`
 + Add the class to `styles.scss`
 
 ## To add Tags
-+ Add the tagName and the display to _**TagsModifiers**_ in `config.js`
++ Add the tagName and the display to _**Modifiers**_ in `config.js`
 
 ## To add Colors
 + Add them to _**colorsList**_ in `config.js`
@@ -28,9 +28,14 @@ Run `npm start` for a dev server.
 ##### select word by dobleclicking on it or selectin a part or the whole word
 
 + Insert Text and edit it pressing the **Edit Text** button and apply different styles and colors to it
-+ You can also look for synonyms of a word by selecting it and pressing **Synonyms**, then open the **select synonym** tab and choose one
++ You can also look for synonyms of a word by selecting it and pressing **Synonyms**
 + Select a word and change its color by selecting one in the **colors** tab
 + Change the size of a word with the **select size** tab
 + You can save the file with the applied changes in memory with the **Save File** button or discard it with the **Clear File** button
++ You can remove all styling with the **Remove Styles** button
 
+##Bugs
+
++To choose a synonym you have to click in the radio input, not the label
++When you change the Tag or choose a Synonym you lose the text selection
 
