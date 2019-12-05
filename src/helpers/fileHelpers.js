@@ -8,15 +8,15 @@ export const activeElNode = () => {
 
 export const textInputHandler = (state, dispatch) => {
     const text = document.getElementById('text-input');
-    deleteState(state, dispatch)
-    addText(state, dispatch, text.value)
+    deleteState(state, dispatch);
+    addText(state, dispatch, text.value);
 };
 
 export const wordSelectedHandler = (state, dispatch) => {
     const activeElContainer = activeElNode();
     if(!activeElContainer){
-        setSelectedWord(state, dispatch, '')
-        return
+        setSelectedWord(state, dispatch, '');
+        return;
     }
-    setSelectedWord(state, dispatch)
+    setSelectedWord(state, dispatch);
 };

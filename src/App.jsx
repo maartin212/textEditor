@@ -5,10 +5,10 @@ import FileZone from './file-zone/FileZone';
 import reducer, {initialState} from "./state";
 
 const App = () => {
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-    }, [])
+    }, []);
 
     return (
         <div className='App'>

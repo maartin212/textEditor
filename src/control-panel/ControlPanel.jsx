@@ -8,22 +8,21 @@ import SizeSelect from './components/SizeSelect';
 import {removeStyles, saveState, clearState} from "../helpers/stateHelper";
 
 const ControlPanel = (props) => {
-    const {colorsList, Modifiers, textSizes} = config
-    const {state, dispatch} = {...props}
-    const {wordId, text} = {...state}
-
-    const [classes, setClasses] = useState([])
-    const [styles, setStyles] = useState({})
-    const [tag, setTag] = useState('')
+    const {colorsList, Modifiers, textSizes} = config;
+    const {state, dispatch} = {...props};
+    const {wordId, text} = {...state};
+    const [classes, setClasses] = useState([]);
+    const [styles, setStyles] = useState({});
+    const [tag, setTag] = useState('');
 
     useEffect(() => {
-        const emptyStyles = {classes:[], styles:{}, tag:''}
-        const word = text[wordId]
-        const {classes, styles, tag} = word || emptyStyles
-        setClasses(classes)
-        setStyles(styles)
-        setTag(tag)
-    }, [state])
+        const emptyStyles = {classes:[], styles:{}, tag:''};
+        const word = text[wordId];
+        const {classes, styles, tag} = word || emptyStyles;
+        setClasses(classes);
+        setStyles(styles);
+        setTag(tag);
+    }, [state]);
 
     return (
         <div id='control-panel'>

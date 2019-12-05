@@ -1,15 +1,17 @@
-import React, {useRef} from 'react'
+import React from 'react';
 
 const TextFactory = (props) => {
+    const {state} = props;
 
-    const {state} = props
+    return (
+        state.text.map((word, index) => {
+            const Tag = word.tag || 'span';
 
-    const activeEl = useRef(null)
-// console.log(activeEl.current)
-    return state.text.map((word, index) => {
-        const Tag = word.tag || 'span'
-        return <Tag className={word.classes.join(' ')} ref={activeEl} onClick={() => activeEl.current = window.getSelection().anchorNode.parentElement} style={word.styles} id={index} key={index}>{word.value} </Tag>
-    })
-}
+            return (
+                <Tag className={word.classes.join(' ')} style={word.styles} id={index} key={index}>{word.value} </Tag>
+            );
+        })
+    );
+};
 
-export default TextFactory
+export default TextFactory;
